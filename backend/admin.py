@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from django.conf import settings
-from .models import Profile
+from .models import Profile, Item, Attribute
 
 
 class ProfileInline(admin.StackedInline):
@@ -22,3 +21,14 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(get_user_model())
 admin.site.register(get_user_model(), CustomUserAdmin)
+
+
+class AttributeInline(admin.TabularInline):
+    model = Attribute
+
+
+class ItemAdmin(admin.ModelAdmin):
+    inlines = (AttributeInline, )
+
+
+admin.site.register(Item, ItemAdmin)
