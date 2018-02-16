@@ -20,6 +20,9 @@
             {% else %}
             <li><a href="{% url 'login' %}">login</a></li>
             {% endif %}
+            {% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}">admin</a></li>
+            {% endif %}
         </ul>
         <ul>
             <li><a href="{% url 'index' %}">index</a></li>
