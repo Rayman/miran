@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #eee;
+}
+
+body > header {
+    background-color: #ddd;
+}
+
+body > aside {
+    background-color: #ccc;
+}
+
+body > footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #ddd;
+}

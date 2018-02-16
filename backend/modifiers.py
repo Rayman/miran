@@ -1,0 +1,2 @@
+class IncreasedAttackSpeed:
+    pass

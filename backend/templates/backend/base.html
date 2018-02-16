@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Miran RPG | {% block title %}-{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'backend/base.css' %}" />
+</head>
+
+<body>
+    <header>
+        Header
+    </header>
+    <aside>
+        <ul>
+            {% if user.is_authenticated %}
+            <li>Welcome {{ user.get_username }} <a href="{% url 'logout' %}">logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">login</a></li>
+            {% endif %}
+        </ul>
+        <ul>
+            <li><a href="{% url 'index' %}">index</a></li>
+            <li><a href="{% url 'fight' %}">fight</a></li>
+        </ul>
+    </aside>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        Footer
+    </footer>
+</body>
+
+</html>
