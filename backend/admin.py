@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile, Item, Attribute
+
+from .models import Profile, Item, Attribute, Monster
 
 
 class ProfileInline(admin.StackedInline):
@@ -27,8 +28,13 @@ class AttributeInline(admin.TabularInline):
     model = Attribute
 
 
+@admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     inlines = (AttributeInline, )
 
 
-admin.site.register(Item, ItemAdmin)
+@admin.register(Monster)
+class MonsterAdmin(admin.ModelAdmin):
+    list_display = ('name', 'level')
+    list_editable = ('name', 'level')
+    list_display_links = None

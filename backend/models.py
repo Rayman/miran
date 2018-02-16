@@ -45,3 +45,11 @@ class Attribute(models.Model):
 
     type = models.PositiveIntegerField(choices=TYPES)
     value = models.PositiveIntegerField()
+
+
+class Monster(models.Model):
+    name = models.CharField(max_length=100)
+    level = models.PositiveSmallIntegerField()
+
+    class Meta:
+        ordering = ['level']
