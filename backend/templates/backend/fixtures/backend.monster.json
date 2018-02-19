@@ -1,0 +1,1 @@
+[{"model": "backend.monster", "pk": 1, "fields": {"name": "Rat", "level": 1}}, {"model": "backend.monster", "pk": 2, "fields": {"name": "Chicken", "level": 2}}, {"model": "backend.monster", "pk": 3, "fields": {"name": "Wolf", "level": 3}}, {"model": "backend.monster", "pk": 4, "fields": {"name": "Elder wolf", "level": 4}}]
