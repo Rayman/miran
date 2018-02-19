@@ -1,0 +1,7 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+Level: {{level}}
+Exp: {{exp}}
+<a href="{% url 'levelup' %}">Level up!</a>
+{% endblock %}

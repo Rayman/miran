@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
     level = models.PositiveSmallIntegerField(default=1)
+    exp = models.PositiveIntegerField()
 
     def __str__(self):
         return self.user.username
