@@ -68,3 +68,5 @@ node_modules/
 ## User gitignore
 
 db.sqlite3
+.vscode/
+.idea/
