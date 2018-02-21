@@ -11,5 +11,5 @@ urlpatterns = [
     path('fight', views.fight, name='fight'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('levelup', views.LevelUp.as_view(), name='levelup'),
-    path('levelup/<int:level>', views.LevelUp.as_view(), name='levelupview'),
+    path('levelup/success', views.LevelUp.as_view(), name='levelupview', kwargs={'success': True}),
 ]

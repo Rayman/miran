@@ -1,7 +1,9 @@
 {% extends 'backend/base.html' %}
 
 {% block content %}
-Level: {{level}}
-Exp: {{exp}}
+Level: {{ user.profile.level }}
+Exp: {{ user.profile.exp }}
+{% if user.profile.can_level %}
 <a href="{% url 'levelup' %}">Level up!</a>
+{% endif %}
 {% endblock %}

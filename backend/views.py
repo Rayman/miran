@@ -6,7 +6,6 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -23,7 +22,17 @@ def dashboard(request):
 @method_decorator(login_required, name='dispatch')
 class LevelUp(TemplateView):
     template_name = 'backend/levelup.html'
+    extra_context = {
+        'title': 'Level up!!!',
+    }
+
+    def get(self, request, success=False):
+        return super().get(request, didlevel=success)
 
     def post(self, request):
         logger.info('LevelUp')
-        return redirect('levelupview', level=3)
+
+        user = request.user
+        user.profile.levelup()
+
+        return redirect('levelupview', success=True)
