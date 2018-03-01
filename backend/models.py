@@ -1,3 +1,4 @@
+from enum import unique
 import logging
 
 from django.db import models
@@ -5,6 +6,8 @@ from django.conf import settings
 from django.db.models import F
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .utils import ChoiceEnum
+
 
 logger = logging.getLogger(__name__)
 
@@ -53,15 +56,16 @@ class Item(models.Model):
     type = models.PositiveIntegerField(choices=TYPES)
 
 
-class Attribute(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='attributes')
+class Affix(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='affixes')
 
-    TYPES = (
-        (0, 'Health'),
-        (1, 'Defense'),
-    )
+    @unique
+    class Types(ChoiceEnum):
+        local_physical_damage_percent = 0
+        local_physical_damage = 1
+        local_attack_speed_percent = 2
 
-    type = models.PositiveIntegerField(choices=TYPES)
+    type = models.PositiveIntegerField(choices=Types.choices())
     value = models.PositiveIntegerField()
 
 

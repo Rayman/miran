@@ -16,7 +16,7 @@ def fight(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'backend/dashboard.html')
+    return render(request, 'backend/dashboard.html', {'title': 'Dashboard'})
 
 
 @method_decorator(login_required, name='dispatch')
