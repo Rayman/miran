@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout', auth_views.LogoutView.as_view(), name='logout'),
     path('fight', views.fight, name='fight'),
     path('dashboard', views.dashboard, name='dashboard'),
+    path('inventory', views.Inventory.as_view(), name='inventory'),
     path('levelup', views.LevelUp.as_view(), name='levelup'),
     path('levelup/success', views.LevelUp.as_view(), name='levelupview', kwargs={'success': True}),
 ]

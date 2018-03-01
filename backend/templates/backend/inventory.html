@@ -1,0 +1,82 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+
+<h3>Equiped</h3>
+<table class="table w-50">
+    <thead>
+        <tr>
+            <th scope="col">Slot</th>
+            <th scope="col">Name</th>
+            <th scope="col">action</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Slot</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">main_hand</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">off_hand</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">torso</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">feet</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">hands</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">head</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">neck</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">waist</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">ring_l</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    <tr>
+        <th scope="row">ring_r</th>
+        <td>Bla</td>
+        <td>blabal</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Bag</h3>
+<ul>
+    {% for item in object_list %}
+    <li>{{ item.name }}</li>
+    {% empty %}
+    <li>No items yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

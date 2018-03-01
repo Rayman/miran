@@ -21,6 +21,17 @@ class Profile(models.Model):
     level = models.PositiveSmallIntegerField(default=1)
     exp = models.PositiveIntegerField()
 
+    main_hand = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='main_hand_slot')
+    off_hand = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='off_hand_slot')
+    torso = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='torso_slot')
+    feet = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='feet_slot')
+    hands = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='hands_slot')
+    head = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='head_slot')
+    neck = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='neck_slot')
+    waist = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='waist_slot')
+    ring_l = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='ring_l_slot')
+    ring_r = models.OneToOneField('Item', on_delete=models.SET_NULL, null=True, related_name='ring_r_slot')
+
     def can_level(self):
         return self.exp > exp_to_level(self.level)
 
@@ -41,19 +52,35 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='items')
-
     name = models.CharField(max_length=100)
+    ilvl = models.PositiveSmallIntegerField()
 
-    TYPES = (
-        ('Weapon', (
-            (0, 'Dagger'),
-            (1, 'Sword'),
-            (2, 'Axe'),
-        )),
-        (3, 'Body'),
-    )
+    @unique
+    class Types(ChoiceEnum):
+        # Weapons
+        AXE = 0
+        BOW = 1
+        CLAW = 2
+        DAGGER = 3
+        MACE = 4
+        STAFF = 5
+        SWORD = 6
+        WAND = 7
 
-    type = models.PositiveIntegerField(choices=TYPES)
+        # Armour
+        BODY_ARMOUR = 20
+        BOOTS = 21
+        GLOVES = 22
+        HELMET = 23
+        SHIELD = 24
+
+        # Accessories
+        AMULET = 50
+        BELT = 51
+        QUIVER = 52
+        RING = 53
+
+    type = models.PositiveIntegerField(choices=Types.choices())
 
 
 class Affix(models.Model):

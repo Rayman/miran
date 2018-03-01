@@ -1,4 +1,5 @@
 {% load static %}
+{% load active_link_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +45,16 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
+                        <a class="nav-link {% active_link 'dashboard' %}" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% active_link 'inventory' %}" href="{% url 'inventory' %}">Inventory</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">PvP</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'fight' %}">Battle</a>
+                        <a class="nav-link {% active_link 'fight' %}" href="{% url 'fight' %}">Battle</a>
                     </li>
                 </ul>
 

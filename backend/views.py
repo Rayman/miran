@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView, ListView
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +18,15 @@ def fight(request):
 def dashboard(request):
     return render(request, 'backend/dashboard.html', {'title': 'Dashboard'})
 
+@method_decorator(login_required, name='dispatch')
+class Inventory(ListView):
+    template_name = 'backend/inventory.html'
+    extra_context = {
+        'title': 'Inventory',
+    }
+
+    def get_queryset(self):
+        return self.request.user.items.all()
 
 @method_decorator(login_required, name='dispatch')
 class LevelUp(TemplateView):
