@@ -1,0 +1,28 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+<table class="table w-50">
+    <thead>
+    <tr>
+        <th scope="col">Level</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for monster in object_list %}
+    <tr>
+        <th scope="row" class="align-middle">{{ monster.level }}</th>
+        <td class="align-middle">{{ monster.name }}</td>
+        <td>
+            <form action="{% url 'fight' monster.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Fight!" class="btn btn-primary" />
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

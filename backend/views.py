@@ -6,17 +6,40 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, DetailView, ListView
 
+from backend.models import Monster
+
 logger = logging.getLogger(__name__)
 
 
-@login_required
-def fight(request):
-    return render(request, 'backend/fight.html')
+@method_decorator(login_required, name='dispatch')
+class FightList(ListView):
+    template_name = 'backend/fightlist.html'
+    extra_context = {
+        'title': 'Fight',
+    }
+
+    def get_queryset(self):
+        return Monster.objects.all()
+
+
+@method_decorator(login_required, name='dispatch')
+class Fight(DetailView):
+    model = Monster
+    template_name = 'backend/fight.html'
+    extra_context = {
+        'title': 'Fight',
+    }
+
+    def post(self, request, pk):
+        monster = self.get_object()
+        logger.info('attack %s', monster.name)
+        return redirect('fight', pk)
 
 
 @login_required
 def dashboard(request):
     return render(request, 'backend/dashboard.html', {'title': 'Dashboard'})
+
 
 @method_decorator(login_required, name='dispatch')
 class Inventory(ListView):
@@ -27,6 +50,7 @@ class Inventory(ListView):
 
     def get_queryset(self):
         return self.request.user.items.all()
+
 
 @method_decorator(login_required, name='dispatch')
 class LevelUp(TemplateView):
