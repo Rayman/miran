@@ -4,9 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, DetailView, ListView, View
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.detail import SingleObjectTemplateResponseMixin, SingleObjectMixin
 
-from backend.models import Monster
+from .models import Monster
+from .services import FightRunner
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +26,7 @@ class FightList(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class Fight(DetailView):
+class Fight(TemplateResponseMixin, SingleObjectMixin, View):
     model = Monster
     template_name = 'backend/fight.html'
     extra_context = {
@@ -31,9 +34,13 @@ class Fight(DetailView):
     }
 
     def post(self, request, pk):
-        monster = self.get_object()
+        self.object = monster = self.get_object()
         logger.info('attack %s', monster.name)
-        return redirect('fight', pk)
+
+        result = 'won!'
+
+        context = self.get_context_data(result=result)
+        return self.render_to_response(context)
 
 
 @login_required
