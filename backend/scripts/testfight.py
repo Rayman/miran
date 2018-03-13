@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 
 from backend.models import Monster
-
 from backend.services import FightRunner
 
 
@@ -13,3 +12,5 @@ def run(user_id, monster_id):
     fight_result = fr.fight()
     for attack in fight_result:
         print(attack)
+
+    print("%s won the fight" % fight_result.winner.name)
