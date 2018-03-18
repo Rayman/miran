@@ -12,5 +12,4 @@ def run(user_id, monster_id):
     fight_result = fr.fight()
     for attack in fight_result:
         print(attack)
-
-    print("%s won the fight" % fight_result.winner.name)
+    print(fight_result)

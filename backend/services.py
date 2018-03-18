@@ -109,9 +109,7 @@ class FightResult(Iterable):
         return iter(self.history)
 
     def __str__(self):
-        return '''Fight result:
-        OK
-        '''
+        return '%s won the fight' % self.winner.name
 
 
 class FightRunner(object):
