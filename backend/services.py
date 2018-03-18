@@ -5,10 +5,14 @@ from copy import copy
 import random
 
 
-class Attack(namedtuple('Attack', ['attacker', 'defender', 'damage'])):
+class Attack(namedtuple('Attack', ['attacker', 'defender', 'damage', 'crit'])):
     def __str__(self):
-        return '%s attacked %s for %d damage (%d left)' % (
+        s = '%s attacked %s for %d damage (%d left)' % (
         self.attacker.name, self.defender.name, self.damage, self.defender.current_life)
+        if self.crit:
+            return s + ' CRIT!!!'
+        else:
+            return s
 
 
 class TotalStats(ABC):
@@ -29,6 +33,7 @@ class TotalStats(ABC):
     def min_damage(self):
         pass
 
+    @property
     @abstractmethod
     def max_damage(self):
         pass
@@ -37,12 +42,27 @@ class TotalStats(ABC):
     def attack_speed(self):
         return 1.2
 
+    @property
+    def crit_chance(self):
+        """Change to make a critical hit"""
+        return 0.05
+
+    @property
+    def crit_damage(self):
+        """Damage multiplier of a critical hit"""
+        return 1.5
+
     def attack(self, defender):
         dmg = random.randrange(self.min_damage, self.max_damage)
+
+        crit = random.random() < self.crit_chance
+        if crit:
+            dmg *= self.crit_damage
+
         defender.current_life -= dmg
         if defender.current_life < 0:
             defender.current_life = 0
-        return Attack(attacker=copy(self), defender=copy(defender), damage=dmg)
+        return Attack(attacker=copy(self), defender=copy(defender), damage=dmg, crit=crit)
 
 
 class TotalUserStats(TotalStats):
