@@ -1,0 +1,5 @@
+colorlog
+django
+django-active-link
+django-debug-toolbar
+django-extensions
