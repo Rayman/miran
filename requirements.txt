@@ -5,11 +5,11 @@
 #    pip-compile
 #
 asgiref==3.2.3            # via django
-colorlog==4.0.2
-django-active-link==0.1.6
-django-debug-toolbar==2.1
-django-extensions==2.2.5
-django==3.0.3
+colorlog==4.0.2           # via -r requirements.in
+django-active-link==0.1.6  # via -r requirements.in
+django-debug-toolbar==2.1  # via -r requirements.in
+django-extensions==2.2.5  # via -r requirements.in
+django==3.0.7             # via -r requirements.in, django-debug-toolbar
 pytz==2019.3              # via django
 six==1.13.0               # via django-extensions
 sqlparse==0.3.0           # via django, django-debug-toolbar
